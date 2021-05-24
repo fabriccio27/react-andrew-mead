@@ -5,22 +5,26 @@
   "main": "index.js",
   "scripts": {
     "serve": "live-server public/",
-    "build": "webpack --watch",
-    "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-server": "webpack serve --mode development"
   },
   "author": "Fabricio Saavedra",
   "license": "ISC",
   "dependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.5.2",
-    "babel-preset-react": "^6.24.1",
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.2.2",
     "live-server": "^1.2.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "validator": "^8.0.0",
-    "webpack": "^3.1.0"
+    "webpack": "^5.37.1",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.7.0"
   }
 }

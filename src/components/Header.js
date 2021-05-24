@@ -9,6 +9,6 @@ const Header = (props) =>{
     );
 }
 Header.defaultProps = {
-    title:"generic title"
+    title:"Indecision"
 };
 export default Header;

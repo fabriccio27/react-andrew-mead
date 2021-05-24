@@ -1,14 +1,19 @@
 import React from "react";
 
 export default class AddOption extends React.Component {
-    constructor(props){
+    /* constructor(props){
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state ={
             error:undefined
         };
-    }
-    handleSubmit(event){
+    } */ 
+    //esto lo puedo hacer por el plugin de class-properties, que viene en uno de los presets
+    state = {
+        error:undefined
+    };
+
+    handleSubmit = (event) => {
         event.preventDefault();
         const todo = event.target.newoption.value.trim();
         const error = this.props.handleAddOption(todo);
