@@ -1,0 +1,33 @@
+.add-option-error{
+    color:$off-white;
+    font-style:italic;
+    padding:0 $m-size;
+    margin:$m-size 0 0 0;
+}
+.add-option {
+    display: flex;
+    flex-direction:column;
+    padding:$m-size;
+
+}
+.add-option__input {
+    background:$dark-blue;
+    border:none;
+    border-bottom:.3rem solid darken($dark-blue,10%);
+    color:$off-white;
+    padding:$s-size;
+    flex-grow:1;
+    margin: 0 0 $s-size 0 ;
+    
+}
+//esto es mobile first, tengo todo definido para pantallas chicas, y estas cosas de abajo son para disp de mas de 450 px
+@media (min-width:$desktop-br){
+    //esta media-query corre para pantallas de mas 450 pixels
+    .add-option {
+        flex-direction:row;
+    } // esto me pone input y submit en fila
+    .add-option__input {
+        margin: 0 $s-size 0 0;
+    }
+    
+}

@@ -3,9 +3,10 @@ import AddOption from "./AddOptions.js";
 import Header from "./Header.js";
 import Action from "./Action.js";
 import Options from "./Options.js";
+import OptionModal from "./OptionModal.js"
 
 class IndecisionApp extends React.Component {
-    constructor(props){
+    /* constructor(props){
         super(props);
         this.state = {
             options:[]
@@ -14,6 +15,10 @@ class IndecisionApp extends React.Component {
         this.handlePick = this.handlePick.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
         this.handleRemoveOption = this.handleRemoveOption.bind(this);
+    }} */
+    state = {
+        options:[],
+        selectedOption:undefined
     }
 
     componentDidMount(){
@@ -27,26 +32,29 @@ class IndecisionApp extends React.Component {
         } catch(err) {
             console.log(err);
         }
-        console.log("Indecision App mounted, fetching data");
-        
     }
 
     componentDidUpdate(prevProps,prevState){
         if(prevState.options.length!=this.state.options.length){
-            console.log("saving data");
             const json = JSON.stringify(this.state.options);
             localStorage.setItem("options", json);//key options, value json:repr de array options
-
         }
     }
-    handleDeleteAll(){
+
+    handleClearSelected = () => {
+        this.setState(()=>{
+            return {selectedOption:undefined};
+        });
+    }
+
+    handleDeleteAll=()=>{
         this.setState(()=>{
             return {options:[]};
         });
     //Si quiero devolver un objeto con la sintax corta, despues de la flecha pongo () y adentro {} del objeto
     // seria this.setState(()=>({options:[]})) , si no uso los () despues de la flecha, toma {} como body de funcion
     }
-    handleRemoveOption(option){
+    handleRemoveOption=(option)=>{
         console.log("trying to remove one option", option);
         // esto se puede hacer con un filter sobre el array de options
         
@@ -56,12 +64,15 @@ class IndecisionApp extends React.Component {
             };
         });
     }
-    handlePick(){
+    handlePick=()=>{
         let l = this.state.options.length;
         let idx = Math.floor(Math.random()*l);
         console.log(this.state.options[idx]);
+        this.setState(()=>{
+            return {selectedOption:this.state.options[idx]};
+        });
     }
-    handleAddOption(option){
+    handleAddOption=(option)=>{
         //yo no hice validacion acá, pero podria hacerla para que regrese errores 
         if (!option) return "Error: void input";
         if (this.state.options.indexOf(option)!=-1) return "Error: option already listed";
@@ -80,9 +91,14 @@ class IndecisionApp extends React.Component {
         return(
             <div>
                 <Header subtitle={subtitle}/>
-                <Action hasOptions={this.state.options.length>0} handlePick={this.handlePick}/>
-                <Options options={this.state.options} removeAll={this.handleDeleteAll} handleRemoveOption={this.handleRemoveOption}/>
-                <AddOption handleAddOption={this.handleAddOption}/>
+                <div className="container">
+                    <Action hasOptions={this.state.options.length>0} handlePick={this.handlePick}/>
+                    <div className="widget">
+                        <Options options={this.state.options} removeAll={this.handleDeleteAll} handleRemoveOption={this.handleRemoveOption}/>
+                        <AddOption handleAddOption={this.handleAddOption}/>
+                    </div>
+                </div>
+                <OptionModal selectedOption={this.state.selectedOption} handleClearSelected={this.handleClearSelected}/>
             </div>
         )
     }

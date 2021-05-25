@@ -1,0 +1,44 @@
+/* ReactModalPortal es un div vacio, cuando ejecuto handler de eleccion
+me añade contenido a ReactModalPortal, el overlay (todo lo que tapa a la ui anterior) y el content (la cajita) */
+.ReactModalPortal > div {
+    opacity:0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+    //no puedo poner opacity 1 acá porque no apunto a lo correcto, tengo que apuntar al overlay con modifier (--)
+    transition: opacity 200ms ease-in-out;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity:1;
+} 
+// para que tambien haga transicion al salir de modal, tengo que setear algo en el componente del modal
+//closeTimeoutMS es el tiempo que quiero esperar antes de desmontar el modal. Si no lo seteo, me lo saca antes de hacer la transicion de salida
+//ademas tengo que apuntar al modifiero correcto del overlay antes de cerrarse
+.ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity:0;
+} 
+
+/* si quiero estilizar la caja del modal, puedo hacer override de la que tiene ReactModalPortal__content, o 
+agregar una clase en la definición del componente, como hice con closeTimeoutMS, pero dando className y trabajar
+con eso */
+.modal {
+    background:$light-blue;
+    color:white;
+    max-width:30rem;
+    outline:none;
+    padding:$l-size;
+    text-align:center;
+}
+.modal__title {
+    margin:0 0 $m-size 0;
+}
+.modal__body {
+    margin:0 0 $l-size 0;
+    font-size:2rem;
+    font-weight:300;
+    word-break:break-all;
+}

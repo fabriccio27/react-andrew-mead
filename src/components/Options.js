@@ -18,12 +18,22 @@ class Options extends React.Component {
         
         return(
             <div>
-                <ul>
-                    {this.props.options.map(option=>{
-                        return <Option key={option} handleRemoveOption={this.props.handleRemoveOption} optionText={option} />
+                <div className="widget-header">
+                    <h3 className="widget-header__h3">Your options</h3>
+                    <button className="button button--link" onClick={this.props.removeAll}>Remove all options</button>
+                </div>
+                {this.props.options.length==0 && <p className="widget__message">Enter your options to begin!</p>}
+                <div>
+                    {this.props.options.map((option, index)=>{
+                        return <Option 
+                                key={option} 
+                                handleRemoveOption={this.props.handleRemoveOption} 
+                                optionText={option}
+                                count={index+1} 
+                                />
                     })}
-                </ul>
-                <button onClick={this.props.removeAll}>Remove all options</button>
+                </div>
+                
             </div>
         )
     }

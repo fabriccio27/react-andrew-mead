@@ -23,6 +23,10 @@ module.exports = {
             },
             test:/\.js$/, // lo que tenga.js al final
             exclude: /node_modules/
+        },{
+            test:/\.s?css$/i,
+            use: ["style-loader","css-loader","sass-loader"],
+            //estos 3 hacen que interprete scss como css y que el scss/css que hice, lo interprete como un style tag en head
         }]
     },
     devtool: 'eval-cheap-module-source-map',
